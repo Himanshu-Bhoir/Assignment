@@ -1,0 +1,111 @@
+Q1:
+def merge_arrays(X, Y):
+    m = len(X)
+    n = len(Y)
+    i = m - n - 1
+    j = n - 1
+    k = m - 1
+
+    while i >= 0 and j >= 0:
+        if X[i] > Y[j]:
+            X[k] = X[i]
+            i -= 1
+        else:
+            X[k] = Y[j]
+            j -= 1
+        k -= 1
+
+    while j >= 0:
+        X[k] = Y[j]
+        j -= 1
+        k -= 1
+
+    return X
+
+X = [0, 2, 0, 3, 0, 5, 6, 0, 0]
+Y = [1, 8, 9, 10, 15]
+
+result = merge_arrays(X, Y)
+print(result)
+
+Q2:
+def max_sum_path(X, Y):
+    sum_X = 0
+    sum_Y = 0
+    i = 0
+    j = 0
+    max_sum = 0
+
+    while i < len(X) and j < len(Y):
+        if X[i] < Y[j]:
+            sum_X += X[i]
+            i += 1
+        elif X[i] > Y[j]:
+            sum_Y += Y[j]
+            j += 1
+        else:
+            max_sum += max(sum_X, sum_Y) + X[i]
+            sum_X = 0
+            sum_Y = 0
+            i += 1
+            j += 1
+
+    while i < len(X):
+        sum_X += X[i]
+        i += 1
+
+    while j < len(Y):
+        sum_Y += Y[j]
+        j += 1
+
+    max_sum += max(sum_X, sum_Y)
+
+    return max_sum
+
+X = [3, 6, 7, 8, 10, 12, 15, 18, 100]
+Y = [1, 2, 3, 5, 7, 9, 10, 11, 15, 16, 18, 25, 50]
+
+result = max_sum_path(X, Y)
+print("The maximum sum path is:", result)
+
+Q3: (Java)
+import java.util.HashMap;
+
+public class WordCount {
+    public static void main(String[] args) {
+        String inputString = "This is a sample string with some words";
+        HashMap<String, Integer> wordCountMap = new HashMap<>();
+
+        String[] words = inputString.split("\\s+");
+
+        for (String word : words) {
+            wordCountMap.put(word, wordCountMap.getOrDefault(word, 0) + 1);
+        }
+
+        System.out.println("Word Counts:");
+        for (String word : wordCountMap.keySet()) {
+            System.out.println("Word: " + word + ", Count: " + wordCountMap.get(word));
+        }
+    }
+}
+
+Q4: (Java)
+import java.util.HashMap;
+
+public class DuplicateCharacters {
+    public static void main(String[] args) {
+        String inputString = "hello";
+        HashMap<Character, Integer> charCountMap = new HashMap<>();
+
+        for (char c : inputString.toCharArray()) {
+            charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
+        }
+
+        System.out.println("Duplicate Characters:");
+        for (char c : charCountMap.keySet()) {
+            if (charCountMap.get(c) > 1) {
+                System.out.println(c);
+            }
+        }
+    }
+}
