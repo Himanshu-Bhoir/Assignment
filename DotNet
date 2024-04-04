@@ -1,0 +1,79 @@
+Q1:
+def rank_array(arr):
+    sorted_arr = sorted(arr)
+    rank_dict = {val: i + 1 for i, val in enumerate(sorted_arr)}
+    return [rank_dict[val] for val in arr]
+
+input_arr = [10, 8, 15, 12, 6, 20, 1]
+output_arr = rank_array(input_arr)
+print(output_arr)
+
+Q2:
+def longest_substring_without_repeating(s):
+    char_index_map = {}
+    max_length = 0
+    start = 0
+
+    for i, char in enumerate(s):
+        if char in char_index_map and char_index_map[char] >= start:
+            start = char_index_map[char] + 1
+        else:
+            max_length = max(max_length, i - start + 1)
+        char_index_map[char] = i
+
+    return max_length
+
+s1 = "abcabcbb"
+s2 = "bbbbb"
+s3 = "pwwkew"
+
+print(longest_substring_without_repeating(s1))
+print(longest_substring_without_repeating(s2))
+print(longest_substring_without_repeating(s3))
+
+Q3:
+def non_repeating_characters(s):
+    char_count = {}
+    non_repeating_chars = []
+
+    for char in s:
+        char_count[char] = char_count.get(char, 0) + 1
+
+    for char in s:
+        if char_count[char] == 1:
+            non_repeating_chars.append(char)
+
+    return non_repeating_chars
+
+s = "hello"
+print(non_repeating_characters(s))
+
+Q4: (C#)
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int[] numbers = { 1, 2, 2, 3, 3, 3, 4, 4, 4, 4 };
+        Dictionary<int, int> frequencyDict = new Dictionary<int, int>();
+
+        foreach (int num in numbers)
+        {
+            if (frequencyDict.ContainsKey(num))
+            {
+                frequencyDict[num]++;
+            }
+            else
+            {
+                frequencyDict[num] = 1;
+            }
+        }
+
+        foreach (var pair in frequencyDict)
+        {
+            Console.WriteLine($"Element: {pair.Key}, Frequency: {pair.Value}");
+        }
+    }
+}
